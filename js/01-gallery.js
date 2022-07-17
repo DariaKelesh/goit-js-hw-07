@@ -15,56 +15,30 @@ import { galleryItems } from './gallery-items.js';
 // Ссылка на оригинальное изображение должна храниться в data-атрибуте source на элементе <img>, и указываться в href ссылки. Не добавляй другие HTML теги или CSS классы кроме тех, что есть в этом шаблоне.
 
 
+const galleryRef = document.querySelector(".gallery");
 
-
-// let imgOriginalLink = ''
-
-// galleryRef.addEventListener('click', e => { 
-//     e.preventDefault();
-//     if (e.target.dataset.source) {
-//        imgOriginalLink = e.target.dataset.source;
-  
-//         basicLightbox.create(`
-// 		<img src="${imgOriginalLink}">
-// 	`).show()
-//     }
-  
-//   }
-// )
-
-
-const galleryRef = document.querySelector('.gallery')
-
-const galleryMarkup = galleryItems.map(({preview, original, description})=> {
-    return
-    `<div class="gallery__item">
-  <a class="gallery__link" href="${original}">
-    <img
-      class="gallery__image"
-      src="${preview}"
-      data-source="large-image.jpg"
-      alt="${description}"
-    />
-  </a>
-</div>`
-    
-}).join('');
-
-galleryRef.innerHTML = galleryMarkUp;
-
-const galleryRef = document.querySelector('.gallery')
-
-const galleryMarkup = galleryItems.map(({preview, original, description})=> {
-    return ` <div class="gallery__item">
-  <a class="gallery__link" href="${original}">
-    <img
+const galleryMarkUp = galleryItems.map(({ original, preview, description }) => {
+    return `<div class="gallery__item"> <a class="gallery__link" href="${original}"><img
       class="gallery__image"
       src="${preview}"
       data-source="${original}"
       alt="${description}"
     />
-  </a>
-</div>`
-}).join('')
+  </a> </div>`
+}).join("");
 
-galleryRef.innerHTML = galleryMarkup;
+galleryRef.innerHTML = galleryMarkUp;
+
+let galleryOrigLink = '';
+
+galleryRef.addEventListener("click", handleClick);
+
+function handleClick(event) {
+    event.preventDefault();
+    if (event.target.dataset.source) {
+        galleryOrigLink = event.target.dataset.source;
+    basicLightbox.create(`
+		<img width="1400" height="900" src="${event.target.dataset.source}">
+	`).show()
+}
+}
