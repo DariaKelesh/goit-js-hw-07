@@ -38,7 +38,7 @@ function handleClick(event) {
     if (event.target.dataset.source) {
         galleryOrigLink = event.target.dataset.source;
     basicLightbox.create(`
-		<img width="1400" height="900" src="${event.target.dataset.source}">
+		<img src="${event.target.dataset.source}">
 	`).show()
 }
 }
